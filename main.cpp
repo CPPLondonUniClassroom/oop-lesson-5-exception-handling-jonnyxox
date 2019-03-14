@@ -17,16 +17,22 @@ int main() {
 
 	//This code is in a bit of a sorry state, fix it.
 	std::string name;
-	std::cin >> name;
-	auto& age = studentAges.at(name); //oops, this will throw an exception if the name isn't found;
-	std::cout << name << " is " << age << " years old\n";
+
+	 //oops, this will throw an exception if the name isn'tif found;
+
 
 	//this try catch block has the necessary syntax you need to fulfil the task.
 	try {
-		//do stuff here.
+
+		std::cin.clear();
+        std::cin >> name;
+        if (studentAges.find(name) == studentAges.end()) throw std::range_error{"name input error found"};
+        auto& age = studentAges.at(name);
+        std::cout << name << " is " << age << " years old\n";
 	} catch (const std::out_of_range& e) {
 		//We only go inside here if the exception was thrown.
 		//if you're curious, e.what() returns a string that you can read.
+		std::cout << e.what() << "\n";
 	}
 	
 	return 0;
